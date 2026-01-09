@@ -235,5 +235,3 @@ El ciclo incluye instanciación, inyección de dependencias, inicialización y d
 Personalizaría mediante propiedades externas, profiles y configuraciones condicionales. También se pueden definir beans propios que sobrescriban los predeterminados. Así se mantiene la filosofía de "convención sobre configuración" sin perder flexibilidad.
 
 ---
-
-**⭐ Si este proyecto te ha sido útil, considera darle una estrella en GitHub!**
