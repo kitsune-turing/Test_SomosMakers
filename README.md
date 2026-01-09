@@ -14,14 +14,14 @@
 
 - **Autenticación y Autorización Segura**: Implementación de JWT con Spring Security para protección de endpoints
 - **Caché Distribuido**: Optimización de rendimiento mediante Redis para consultas frecuentes
-- **📊 Panel de Control Interactivo**: Interfaz intuitiva para gestión de préstamos y estadísticas en tiempo real
-- **🏗️ Arquitectura Hexagonal**: Separación clara de responsabilidades y alta mantenibilidad
-- **🔄 Programación Reactiva**: Endpoints reactivos con Spring WebFlux para operaciones de alta concurrencia
-- **📝 Registro de Auditoría**: Trazabilidad completa de todas las operaciones del sistema
-- **🐳 Despliegue Containerizado**: Configuración Docker lista para producción
-- **🎨 Templates Dinámicos**: Vistas renderizadas del lado del servidor con Thymeleaf
+- **Panel de Control Interactivo**: Interfaz intuitiva para gestión de préstamos y estadísticas en tiempo real
+- **Arquitectura Hexagonal**: Separación clara de responsabilidades y alta mantenibilidad
+- **Programación Reactiva**: Endpoints reactivos con Spring WebFlux para operaciones de alta concurrencia
+- **Registro de Auditoría**: Trazabilidad completa de todas las operaciones del sistema
+- **Despliegue Containerizado**: Configuración Docker lista para producción
+- **Templates Dinámicos**: Vistas renderizadas del lado del servidor con Thymeleaf
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
@@ -37,14 +37,14 @@
 | Docker | - | Containerización |
 | Gradle | - | Gestión de dependencias y build |
 
-## 🏛️ Arquitectura
+## Arquitectura
 
 El proyecto implementa una **arquitectura hexagonal** (ports and adapters) que garantiza:
 
-- ✅ Independencia de frameworks externos
-- ✅ Facilidad de testing
-- ✅ Separación entre lógica de negocio e infraestructura
-- ✅ Flexibilidad para cambios futuros
+- Independencia de frameworks externos
+- Facilidad de testing
+- Separación entre lógica de negocio e infraestructura
+- Flexibilidad para cambios futuros
 
 ```
 BanckLoad/
@@ -82,17 +82,17 @@ BanckLoad/
         └── JwtAuthenticationFilter.java
 ```
 
-## 🚀 Requisitos Previos
+## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado:
 
-- ☕ **Java JDK 20** o superior
-- 🐘 **PostgreSQL 14+**
-- 🔴 **Redis 6+**
-- 🐳 **Docker & Docker Compose** (opcional, para despliegue containerizado)
-- 📦 **Gradle 7+** (incluido en el wrapper del proyecto)
+- **Java JDK 20** o superior
+- **PostgreSQL 14+**
+- **Redis 6+**
+- **Docker & Docker Compose** (opcional, para despliegue containerizado)
+- **Gradle 7+** (incluido en el wrapper del proyecto)
 
-## 📦 Instalación y Configuración
+## Instalación y Configuración
 
 ### Opción 1: Despliegue con Docker (Recomendado)
 
@@ -108,9 +108,9 @@ Antes de comenzar, asegúrate de tener instalado:
    ```
 
 3. **La aplicación estará disponible en:**
-   - 🌐 Aplicación: `http://localhost:8080`
-   - 🗄️ PostgreSQL: `localhost:5432`
-   - 🔴 Redis: `localhost:6379`
+   - Aplicación: `http://localhost:8080`
+   - PostgreSQL: `localhost:5432`
+   - Redis: `localhost:6379`
 
 ### Opción 2: Instalación Manual
 
@@ -151,125 +151,19 @@ Antes de comenzar, asegúrate de tener instalado:
    ./gradlew bootRun
    ```
 
-## 📚 Documentación de la API
-
-### Autenticación
-
-#### Registro de Usuario
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "usuario",
-  "email": "usuario@example.com",
-  "password": "password123",
-  "firstName": "Juan",
-  "lastName": "Pérez"
-}
-```
-
-#### Inicio de Sesión
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "username": "usuario",
-  "password": "password123"
-}
-```
-
-**Respuesta:**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "type": "Bearer",
-  "username": "usuario",
-  "roles": ["ROLE_USER"]
-}
-```
-
-### Gestión de Préstamos
-
-#### Solicitar Préstamo
-```http
-POST /api/loans
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "amount": 50000.00,
-  "termMonths": 24,
-  "purpose": "Compra de vehículo",
-  "monthlyIncome": 3000.00
-}
-```
-
-#### Listar Préstamos del Usuario
-```http
-GET /api/loans/my-loans
-Authorization: Bearer {token}
-```
-
-#### Obtener Préstamo por ID
-```http
-GET /api/loans/{id}
-Authorization: Bearer {token}
-```
-
-### Administración (Requiere rol ADMIN)
-
-#### Listar Todos los Préstamos
-```http
-GET /api/loans
-Authorization: Bearer {token}
-```
-
-#### Aprobar Préstamo
-```http
-PUT /api/loans/{id}/approve
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "comments": "Préstamo aprobado - cumple requisitos"
-}
-```
-
-#### Rechazar Préstamo
-```http
-PUT /api/loans/{id}/reject
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "comments": "Ingreso mensual insuficiente"
-}
-```
-
-### Endpoints Reactivos
-
-#### Flujo de Préstamos en Tiempo Real
-```http
-GET /api/reactive/loans/stream
-Authorization: Bearer {token}
-Accept: text/event-stream
-```
-
-## 🖥️ Vistas Web
+## Vistas Web
 
 El sistema incluye una interfaz web completa accesible desde el navegador:
 
-- 🏠 **Login**: `/login` - Página de inicio de sesión
-- 📝 **Registro**: `/register` - Registro de nuevos usuarios
-- 📊 **Dashboard**: `/dashboard` - Panel de control con:
+- **Login**: `/login` - Página de inicio de sesión
+- **Registro**: `/register` - Registro de nuevos usuarios
+- **Dashboard**: `/dashboard` - Panel de control con:
   - Formulario de solicitud de préstamos
   - Lista de préstamos del usuario
   - Panel de administración (solo para administradores)
   - Estadísticas en tiempo real
 
-## 🧪 Pruebas
+## Pruebas
 
 ### Ejecutar todas las pruebas
 ```bash
@@ -291,56 +185,24 @@ El sistema incluye una interfaz web completa accesible desde el navegador:
 ./gradlew test --tests "*IntegrationTest"
 ```
 
-## 🔒 Seguridad
+## Seguridad
 
 El sistema implementa múltiples capas de seguridad:
 
-- **🔐 JWT (JSON Web Tokens)**: Autenticación stateless
-- **🛡️ Spring Security**: Protección de endpoints y control de acceso basado en roles
-- **🔒 Encriptación de Contraseñas**: BCrypt con factor de trabajo configurable
-- **🚫 Protección CSRF**: Tokens anti-falsificación
-- **✅ Validación de Entrada**: Sanitización y validación en todas las capas
-- **📜 Auditoría**: Registro de todas las operaciones críticas
+- **JWT (JSON Web Tokens)**: Autenticación stateless
+- **Spring Security**: Protección de endpoints y control de acceso basado en roles
+- **Encriptación de Contraseñas**: BCrypt con factor de trabajo configurable
+- **Protección CSRF**: Tokens anti-falsificación
+- **Validación de Entrada**: Sanitización y validación en todas las capas
+- **Auditoría**: Registro de todas las operaciones críticas
 
-## ⚡ Optimización y Rendimiento
+## Optimización y Rendimiento
 
 - **Redis Cache**: Almacenamiento en caché de consultas frecuentes
 - **Connection Pooling**: HikariCP para gestión eficiente de conexiones a BD
 - **Lazy Loading**: Carga perezosa de relaciones JPA
 - **Índices de Base de Datos**: Optimización de consultas frecuentes
 - **Programación Reactiva**: Manejo eficiente de operaciones I/O
-
-## 📊 Monitoreo
-
-El sistema incluye endpoints de monitoreo:
-
-```http
-GET /actuator/health        # Estado de salud de la aplicación
-GET /actuator/metrics       # Métricas de la aplicación
-GET /actuator/info          # Información de la aplicación
-```
-
-## 🤝 Contribución
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 👥 Autores
-
-- **Kitsune Turing** - *Desarrollo Inicial* - [GitHub](https://github.com/kitsune-turing)
-
-## 📞 Soporte
-
-Para reportar bugs o solicitar nuevas características, por favor abre un issue en el repositorio de GitHub.
 
 ---
 
