@@ -43,7 +43,7 @@ public class LoanController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('USER') and !hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<LoanResponseDTO> createLoan(
             @Valid @RequestBody LoanRequestDTO request,
             Authentication authentication) {
@@ -53,7 +53,7 @@ public class LoanController {
     }
 
     @PostMapping("/request")
-    @PreAuthorize("hasRole('USER') and !hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<LoanResponseDTO> requestLoan(
             @Valid @RequestBody LoanRequestDTO request,
             Authentication authentication) {
@@ -63,7 +63,7 @@ public class LoanController {
     }
 
     @GetMapping("/my-loans")
-    @PreAuthorize("hasRole('USER') and !hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<LoanResponseDTO>> getMyLoans(Authentication authentication) {
         String username = authentication.getName();
         List<LoanResponseDTO> loans = loanService.getUserLoans(username);

@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BankLoad - Dashboard</title>
+    <script>
+        // Verificar autenticación antes de cargar la página
+        (function() {
+            const token = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('userData');
+
+            if (!token || !userData) {
+                // Redirigir inmediatamente si no hay sesión
+                window.location.replace('/login');
+                // Detener la carga de la página
+                document.write('');
+                window.stop();
+            }
+        })();
+    </script>
     <style>
         * {
             margin: 0;
@@ -392,7 +407,7 @@
                     <input type="text" id="purpose" name="purpose" required placeholder="Ej: Renovación de vivienda">
                 </div>
                 <button type="submit" class="btn">Solicitar Préstamo</button>
-            </form>s
+            </form>
         </div>
 
         <!-- Loans List -->
@@ -635,8 +650,9 @@
         }
 
         // Handle loan form submission (solo para usuarios)
-        if (document.getElementById('loanForm')) {
-            document.getElementById('loanForm').addEventListener('submit', async function(e) {
+        const loanForm = document.getElementById('loanForm');
+        if (loanForm) {
+            loanForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
                 if (isAdmin) {
@@ -647,9 +663,7 @@
                 const formData = {
                     amount: parseFloat(document.getElementById('amount').value),
                     term: parseInt(document.getElementById('term').value),
-                    purpose: document.getElementById('purpose').value,
-                    monthlyIncome: parseFloat(document.getElementById('income').value),
-                    employmentType: document.getElementById('employment').value
+                    purpose: document.getElementById('purpose').value
                 };
 
                 try {
@@ -670,7 +684,7 @@
 
                     const result = await response.json();
                     showAlert('Préstamo solicitado exitosamente', 'success', 'loanAlert');
-                    document.getElementById('loanForm').reset();
+                    loanForm.reset();
                     loadLoans();
                 } catch (error) {
                     console.error('Error:', error);
@@ -762,42 +776,49 @@
         // Show alert message
         function showAlert(message, type, containerId = 'loanAlert') {
             const container = document.getElementById(containerId);
-            if (container) {
-                container.innerHTML = `<div class="alert ${type}">${message}</div>`;
-                setTimeout(() => {
-                    container.innerHTML = '';
-                }, 5000);
-            }
+            if (!container) return;
+
+            // Clear existing alerts
+            container.innerHTML = '';
+
+            const alertBox = document.createElement('div');
+            alertBox.className = `alert ${type === 'success' ? 'alert-success' : 'alert-error'}`;
+            alertBox.textContent = message;
+
+            container.appendChild(alertBox);
+
+            // Auto-remove alert after 5 seconds
+            setTimeout(() => {
+                alertBox.remove();
+            }, 5000);
         }
 
-        // View loan details
-        function viewLoanDetails(loanId) {
-            alert(`Ver detalles del préstamo #${loanId}\n\nEsta funcionalidad puede expandirse para mostrar más información.`);
-        }
-
-        // Format number
+        // Format number as currency
         function formatNumber(num) {
-            return new Intl.NumberFormat('es-ES').format(num);
-        }
-
-        // Format date
-        function formatDate(dateString) {
-            if (!dateString) return 'N/A';
-            const date = new Date(dateString);
-            return date.toLocaleDateString('es-ES');
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
         // Get status text
         function getStatusText(status) {
-            const statusMap = {
-                'PENDING': 'Pendiente',
-                'APPROVED': 'Aprobado',
-                'REJECTED': 'Rechazado'
-            };
-            return statusMap[status] || status;
+            switch (status) {
+                case 'PENDING':
+                    return 'Pendiente';
+                case 'APPROVED':
+                    return 'Aprobado';
+                case 'REJECTED':
+                    return 'Rechazado';
+                default:
+                    return status;
+            }
         }
 
-        // Logout
+        // Format date to dd/mm/yyyy
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            return new Date(dateString).toLocaleDateString('es-ES', options);
+        }
+
+        // Logout function
         function logout() {
             localStorage.clear();
             window.location.href = '/login';
