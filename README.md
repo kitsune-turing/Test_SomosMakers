@@ -167,22 +167,7 @@ El sistema incluye una interfaz web completa accesible desde el navegador:
 
 ### Ejecutar todas las pruebas
 ```bash
-./gradlew test
-```
-
-### Ejecutar pruebas con reporte de cobertura
-```bash
-./gradlew test jacocoTestReport
-```
-
-### Ejecutar solo pruebas unitarias
-```bash
-./gradlew test --tests "*Test"
-```
-
-### Ejecutar solo pruebas de integración
-```bash
-./gradlew test --tests "*IntegrationTest"
+.\gradlew test
 ```
 
 ## Seguridad
